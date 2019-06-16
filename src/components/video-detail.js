@@ -8,3 +8,5 @@ const VideoDetail = ({title, description}) => {
     </div>
   );
 };
+
+export default VideoDetail;
