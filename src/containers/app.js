@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SearchBar from '../components/search-bar';
 import VideoList from '../containers/video-list';
 import axios from 'axios';
@@ -12,7 +12,7 @@ const API_KEY = 'api_key=de6a532d05c6ef152efe7fa6fad7b04f';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {movieList: {}, currentMovie: {}};
+    this.state = { movieList: {}, currentMovie: {} };
   }
 
   componentWillMount() {
@@ -22,12 +22,34 @@ class App extends Component {
   initMovies() {
     axios.get(`${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`).then(
       function(response) {
-        this.setState({
-          movieList: response.data.results.slice(1, 6),
-          currentMovie: response.data.results[0]
-        });
+        this.setState(
+          {
+            movieList: response.data.results.slice(1, 6),
+            currentMovie: response.data.results[0]
+          },
+          function() {
+            this.applyVideoToCurrentMovie();
+          }
+        );
       }.bind(this)
     );
+  }
+
+  applyVideoToCurrentMovie() {
+    axios
+      .get(
+        `${API_END_POINT}movie/${
+          this.state.currentMovie.id
+        }?${API_KEY}&append_to_response=videos&include_adult=false`
+      )
+      .then(
+        function(response) {
+          const youtubeKey = response.data.videos.results[0].key;
+          let newCurrentMovieState = this.state.currentMovie;
+          newCurrentMovieState.videoId = youtubeKey;
+          this.setState({ currentMovie: newCurrentMovieState });
+        }.bind(this)
+      );
   }
 
   render() {

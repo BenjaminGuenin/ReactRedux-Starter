@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import VideoListItem from '../components/video-list-item';
 
-const VideoList = ({movieList}) => {
-  console.log(movieList);
-
+const VideoList = ({ movieList }) => {
   return (
     <div>
       <ul>
