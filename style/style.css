@@ -1,0 +1,13 @@
+.search-bar {
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+li:hover {
+  background-color: azure;
+}
+
+.title-list-item {
+  padding-top: 40px;
+  text-align: center;
+}
