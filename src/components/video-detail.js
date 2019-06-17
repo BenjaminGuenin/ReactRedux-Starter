@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-const VideoDetail = ({title, description}) => {
+const VideoDetail = ({ title, description }) => {
   return (
     <div>
       <h1>{title}</h1>
